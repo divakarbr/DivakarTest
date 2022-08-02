@@ -3,10 +3,12 @@ package Automation.MobilWorld;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SignUp {
 
+	WebDriver driver;
 	@Test
 	 public void sign() throws InterruptedException
 
@@ -31,7 +33,17 @@ public class SignUp {
 	 driver.switchTo().alert().accept();
 	 driver.findElement(By.xpath("//button[@type='Submit']")).click();
 	 driver.switchTo().alert().accept();
-	 Thread.sleep(2000);
+	 driver.quit();
+	 }
+	
+	@BeforeMethod
+	public void signIn()
+	{
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\divakar.br\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+		 WebDriver driver=new ChromeDriver();
+		 driver.get("https://mobileworld.azurewebsites.net/");
+		 driver.manage().window().maximize();
+		 driver.findElement(By.xpath("//button[@class='btn btn-warning my-2 my-sm-0']")).click();	
 	 driver.findElement(By.id("username")).sendKeys("divakar");
 	 driver.findElement(By.id("password")).sendKeys("Divakar@1999");
 	 driver.findElement(By.xpath("//a[@class='btn btn-primary btn-block']")).click();
